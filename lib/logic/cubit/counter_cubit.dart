@@ -54,7 +54,7 @@ class CounterCubit extends Cubit<CounterState> with HydratedMixin {
 
   @override
   Map<String, dynamic> toJson(CounterState state) {
-    addError(Exception('Couldn\'t write to storage'),StackTrace.current);
+    addError(Exception('Couldn\'t write to storage'), StackTrace.current);
 
     return state.toMap();
   }
@@ -63,5 +63,11 @@ class CounterCubit extends Cubit<CounterState> with HydratedMixin {
   void onChange(Change<CounterState> change) {
     print(change);
     super.onChange(change);
+  }
+
+  @override
+  void onError(Object error, StackTrace stackTrace) {
+    print('$error,$stackTrace');
+    super.onError(error, stackTrace);
   }
 }
