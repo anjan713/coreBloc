@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'logic/cubit/counter_cubit.dart';
 import 'logic/cubit/counter_state.dart';
+import 'logic/cubit/cubit/settings_cubit.dart';
 
 void main() {
   runApp(MyApp());
@@ -37,7 +38,11 @@ class _MyAppState extends State<MyApp> {
           providers: [
             BlocProvider<InternetCubit>(
               create: (context) => InternetCubit(connectivity:connectivity),),
-            BlocProvider<CounterCubit>(create: (context)=>CounterCubit(internetCubit: BlocProvider.of<InternetCubit>(context)))  
+            BlocProvider<CounterCubit>(create: (context)=>CounterCubit(internetCubit: BlocProvider.of<InternetCubit>(context))),
+            BlocProvider(
+              create: (context) => SettingsCubit(),
+              child: Container(),
+            ),  
           ],
         child:
         MaterialApp(

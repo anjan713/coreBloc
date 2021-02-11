@@ -10,7 +10,6 @@ import 'package:meta/meta.dart';
 import 'cubit/internet_cubit.dart';
 import 'cubit/internet_state.dart';
 
-
 class CounterCubit extends Cubit<CounterState> {
   StreamSubscription internetStream;
   final InternetCubit internetCubit;
@@ -21,14 +20,18 @@ class CounterCubit extends Cubit<CounterState> {
   }
 
   void internetCounter() {
-     internetStream = internetCubit.listen((connectionState) {
+    internetStream = internetCubit.listen((connectionState) {
       if (connectionState is InternetConnectedState &&
           connectionState.connectiontype == ConnectionType.Wifi) {
+        print('Entered counter cubit wifi condition');
         increment();
       }
       if (connectionState is InternetConnectedState &&
           connectionState.connectiontype == ConnectionType.Mobile) {
+        print('Entered counter cubit wifi condition');
+       
         decrement();
+
       }
     });
   }
@@ -44,4 +47,3 @@ class CounterCubit extends Cubit<CounterState> {
     return super.close();
   }
 }
-
