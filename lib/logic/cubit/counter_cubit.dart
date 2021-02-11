@@ -5,12 +5,13 @@ import 'package:coreBloc/constants/enum.dart';
 import 'package:coreBloc/logic/cubit/counter_state.dart';
 import 'package:coreBloc/logic/cubit/cubit/internet_cubit.dart';
 import 'package:flutter/material.dart';
+import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:meta/meta.dart';
 
 import 'cubit/internet_cubit.dart';
 import 'cubit/internet_state.dart';
 
-class CounterCubit extends Cubit<CounterState> {
+class CounterCubit extends Cubit<CounterState> with HydratedMixin {
   StreamSubscription internetStream;
   final InternetCubit internetCubit;
 
@@ -29,9 +30,8 @@ class CounterCubit extends Cubit<CounterState> {
       if (connectionState is InternetConnectedState &&
           connectionState.connectiontype == ConnectionType.Mobile) {
         print('Entered counter cubit wifi condition');
-       
-        decrement();
 
+        decrement();
       }
     });
   }
@@ -45,5 +45,23 @@ class CounterCubit extends Cubit<CounterState> {
   Future<void> close() {
     internetStream.cancel();
     return super.close();
+  }
+
+  @override
+  CounterState fromJson(Map<String, dynamic> json) {
+    return CounterState.fromMap(json);
+  }
+
+  @override
+  Map<String, dynamic> toJson(CounterState state) {
+    addError(Exception('Couldn\'t write to storage'),StackTrace.current);
+
+    return state.toMap();
+  }
+
+  @override
+  void onChange(Change<CounterState> change) {
+    print(change);
+    super.onChange(change);
   }
 }

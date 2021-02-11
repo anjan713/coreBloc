@@ -11,22 +11,24 @@ class AppRouter {
     switch (routeSettings.name) {
       case '/':
         return MaterialPageRoute(
-            builder: (_) => 
-            // BlocProvider.value(
-                  // value: cubit,
-                  // child: 
-                  MyHomePage(
-                    title: 'first screen',
+            builder: (_) =>
+                // BlocProvider.value(
+                // value: cubit,
+                // child:
+                MyHomePage(
+                  title: 'first screen',
                   // ),
                 ));
         break;
-      // case '/second':
-      //   return MaterialPageRoute(
-      //       builder: (_) => BlocProvider.value(
-      //             value:  cubit,
-      //             child: SecondScreen(
-      //                 // title: 'first screen',
-      //                 ),
+      case '/second':
+          return MaterialPageRoute(
+              builder: (_) =>
+              // => BlocProvider.value(
+        //             value:  cubit,
+        //             child:
+        SecondScreen(
+            //                 // title: 'first screen',
+          ));
       //           ));
       //   break;
       // case '/third':
